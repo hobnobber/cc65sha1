@@ -142,7 +142,7 @@ int command_test( void )
     sha1_context ctx;
     int i, j, maxtests, numsuccess = 0;
     unsigned char sha1sum[20];
-    char output[65];
+    char output[41];
     
     maxtests = sizeof( test_data ) / sizeof( test_data[0] );
     if ( !quiet ) fprintf( outfile, "\nSHA-1 Validation Tests: %d\n\n",maxtests );
