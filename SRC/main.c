@@ -141,7 +141,7 @@ int command_test( void )
 {
     sha1_context ctx;
     int i, j, maxtests, numsuccess = 0;
-    unsigned char sha1sum[32];
+    unsigned char sha1sum[20];
     char output[65];
     
     maxtests = sizeof( test_data ) / sizeof( test_data[0] );
@@ -159,7 +159,7 @@ int command_test( void )
             }
         }
         sha1_finish( &ctx, sha1sum );
-        for ( j = 0; j < 32; j++ ) sprintf( output + j * 2, "%02x", sha1sum[j] );
+        for ( j = 0; j < 20; j++ ) sprintf( output + j * 2, "%02x", sha1sum[j] );
         if ( memcmp( output, test_sha1[i], 40 ) ) {
             if ( !quiet ) fprintf( outfile, "failed!\n" );
         }
@@ -177,14 +177,14 @@ int command_sha1( void )
 {
     int i, j;
     sha1_context ctx;
-    unsigned char sha1sum[32];
+    unsigned char sha1sum[20];
     
     sha1_starts( &ctx );
     while ( ( i = fread( buf, 1, sizeof( buf ), infile ) ) > 0 ) {
         sha1_update( &ctx, buf, i );
     }
     sha1_finish( &ctx, sha1sum );
-    for( j = 0; j < 32; j++ ) {
+    for( j = 0; j < 20; j++ ) {
         // do not check quiet here because we always need to output the SHA1 result
         fprintf( outfile, "%02x", sha1sum[j] );
     }
